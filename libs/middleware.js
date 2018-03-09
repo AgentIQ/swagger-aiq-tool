@@ -156,7 +156,7 @@ function createMiddleWare(swaggerSchema) {
 
     Promise.all(promises)
       .then(() => next())
-      .catch(err => next(err));
+      .catch(err => next(err));   // TODO: should handle error with code 400.
   };
 }
 
