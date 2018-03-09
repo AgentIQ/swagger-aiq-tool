@@ -36,7 +36,7 @@ const mockDefinitions = {
 };
 
 
-describe('Validator - enum field', () => {
+describe('Validator - type checking', () => {
   it('Should validate a integer type', (done) => {
       let v = new Validator(mockDefinitions);
       v.validate(typeSchema, { age: 35 })
