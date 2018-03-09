@@ -1,0 +1,2515 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "2.0.0",
+    "title": "AI Manager API",
+    "description": "<br/>",
+    "contact": {
+      "name": "AgentIQ"
+    }
+  },
+  "basePath": "/",
+  "schemes": [
+    "http",
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/actions": {
+      "get": {
+        "tags": [
+          "Actions"
+        ],
+        "summary": "GET /actions",
+        "description": "returns all entries",
+        "parameters": [
+          {
+            "name": "q",
+            "description": "free text search",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "required": false,
+            "type": "integer"
+          },
+          {
+            "name": "offset",
+            "in": "query",
+            "required": false,
+            "type": "integer"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "list of entries",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "pagination": {
+                  "$ref": "#/definitions/bits.pagination"
+                },
+                "data": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/definitions/Action"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Actions"
+        ],
+        "summary": "PUT /actions",
+        "description": "replace entire collection",
+        "parameters": [
+          {
+            "name": "actions",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "required": [
+                "data"
+              ],
+              "properties": {
+                "data": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/definitions/Action"
+                  }
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "success"
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Actions"
+        ],
+        "summary": "POST /actions",
+        "description": "create an entry",
+        "parameters": [
+          {
+            "name": "action",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Action"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "success",
+            "schema": {
+              "$ref": "#/definitions/Action"
+            }
+          }
+        }
+      }
+    },
+    "/actions/{id}": {
+      "get": {
+        "tags": [
+          "Actions"
+        ],
+        "summary": "GET /actions/{id}",
+        "description": "returns one entry",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "returns one entry",
+            "schema": {
+              "$ref": "#/definitions/Action"
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Actions"
+        ],
+        "summary": "PUT /actions/{id}",
+        "description": "replace one entry",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "action",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Action"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "success",
+            "schema": {
+              "$ref": "#/definitions/Action"
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Actions"
+        ],
+        "summary": "DELETE /actions/{id}",
+        "description": "delete one entry",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "success"
+          }
+        }
+      }
+    },
+    "/building-kit": {
+      "get": {
+        "tags": [
+          "Building Kit"
+        ],
+        "summary": "GET /building-kit",
+        "description": "returns matched objects",
+        "parameters": [
+          {
+            "name": "q",
+            "description": "free text search matched agains templates",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "type",
+            "in": "query",
+            "type": "string",
+            "required": false,
+            "enum": [
+              "dialog",
+              "intent",
+              "workflow",
+              "action",
+              "response"
+            ]
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "list of dialogs",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "pagination": {
+                  "$ref": "#/definitions/bits.pagination"
+                },
+                "data": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "type": {
+                        "type": "string",
+                        "enum": [
+                          "dialog",
+                          "intent",
+                          "workflow",
+                          "action",
+                          "response"
+                        ]
+                      },
+                      "item": {
+                        "type": "object",
+                        "properties": {
+                          "id": {
+                            "type": "string",
+                            "default": 123
+                          },
+                          "name": {
+                            "type": "string",
+                            "default": "name of item"
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/entities": {
+      "get": {
+        "tags": [
+          "Entities"
+        ],
+        "summary": "GET /entities",
+        "description": "returns all entities",
+        "parameters": [
+          {
+            "name": "q",
+            "description": "free text search",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "required": false,
+            "type": "integer"
+          },
+          {
+            "name": "offset",
+            "in": "query",
+            "required": false,
+            "type": "integer"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "list of entities",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "pagination": {
+                  "$ref": "#/definitions/bits.pagination"
+                },
+                "data": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/definitions/Entity"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Entities"
+        ],
+        "summary": "PUT /entities",
+        "description": "replace entire collection",
+        "parameters": [
+          {
+            "name": "entities",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/EntityList"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "success"
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Entities"
+        ],
+        "summary": "POST /entities",
+        "description": "Create an entity",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/EntityUpdate"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "success"
+          },
+          "409": {
+            "description": "Name already exist"
+          }
+        }
+      }
+    },
+    "/entities/{name}": {
+      "get": {
+        "tags": [
+          "Entities"
+        ],
+        "summary": "GET /entities/{name}",
+        "description": "returns all entities",
+        "parameters": [
+          {
+            "name": "name",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "single entity",
+            "schema": {
+              "$ref": "#/definitions/Entity"
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Entities"
+        ],
+        "summary": "DELETE /entities/{name}",
+        "description": "delete one entity",
+        "parameters": [
+          {
+            "name": "name",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "success"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Entities"
+        ],
+        "summary": "PUT /entities/{name}",
+        "description": "replace one entity",
+        "parameters": [
+          {
+            "name": "name",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "entity",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/EntityUpdate"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "success"
+          }
+        }
+      }
+    },
+    "/entities/types/product": {
+      "put": {
+        "tags": [
+          "Entities"
+        ],
+        "summary": "PUT /entities/types/product",
+        "description": "Replace with new products",
+        "parameters": [
+          {
+            "name": "products",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "products": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/definitions/ProductEntity"
+                  }
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Success message"
+          }
+        }
+      }
+    },
+    "/entity_sources": {
+      "get": {
+        "tags": [
+          "Entity Sources"
+        ],
+        "summary": "GET /entity_sources",
+        "description": "returns all entity sources",
+        "responses": {
+          "200": {
+            "description": "success",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/EntitySource"
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Entity Sources"
+        ],
+        "summary": "post /entity_sources",
+        "description": "Create a entity source used for list or regex",
+        "parameters": [
+          {
+            "name": "entity_source",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/EntitySource"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "success"
+          }
+        }
+      }
+    },
+    "/entity_sources/{id}": {
+      "put": {
+        "tags": [
+          "Entity Sources"
+        ],
+        "summary": "PUT /entity_sources/:id",
+        "description": "Update entity source used for list or regex",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "integer"
+          },
+          {
+            "name": "entity_source",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/EntitySource"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "success"
+          },
+          "404": {
+            "description": "not found"
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "Entity Sources"
+        ],
+        "summary": "GET /entity_sources/:id",
+        "description": "get a single entity source",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "integer"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "success",
+            "schema": {
+              "$ref": "#/definitions/EntitySource"
+            }
+          },
+          "404": {
+            "description": "not found"
+          }
+        }
+      }
+    },
+    "/intents": {
+      "get": {
+        "tags": [
+          "Intents"
+        ],
+        "summary": "GET /intents",
+        "description": "returns all intents",
+        "parameters": [
+          {
+            "name": "q",
+            "description": "free text search",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "required": false,
+            "type": "integer"
+          },
+          {
+            "name": "offset",
+            "in": "query",
+            "required": false,
+            "type": "integer"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "list of intents",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "pagination": {
+                  "$ref": "#/definitions/bits.pagination"
+                },
+                "data": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/definitions/Intent"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Intents"
+        ],
+        "summary": "POST /intents",
+        "description": "create an entry",
+        "parameters": [
+          {
+            "name": "intent",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Intent"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "returns added entry",
+            "schema": {
+              "$ref": "#/definitions/Intent"
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Intents"
+        ],
+        "summary": "PUT /intents",
+        "description": "replace entire collection",
+        "parameters": [
+          {
+            "name": "intents",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/IntentList"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "success"
+          }
+        }
+      }
+    },
+    "/intents/{id}": {
+      "get": {
+        "tags": [
+          "Intents"
+        ],
+        "summary": "GET /intents/{id}",
+        "description": "returns one entry",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "returns one entry",
+            "schema": {
+              "$ref": "#/definitions/Intent"
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Intents"
+        ],
+        "summary": "PUT /intents/{id}",
+        "description": "replace one entry",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "entity",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Intent"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "returns updated entry",
+            "schema": {
+              "$ref": "#/definitions/Intent"
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Intents"
+        ],
+        "summary": "DELETE /intents/{id}",
+        "description": "delete one entry",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "success"
+          }
+        }
+      }
+    },
+    "/dialogs": {
+      "get": {
+        "tags": [
+          "Dialogs"
+        ],
+        "summary": "GET /dialogs",
+        "description": "returns all dialogs",
+        "parameters": [
+          {
+            "name": "q",
+            "description": "free text search",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "required": false,
+            "type": "integer"
+          },
+          {
+            "name": "offset",
+            "in": "query",
+            "required": false,
+            "type": "integer"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "list of dialogs",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "pagination": {
+                  "$ref": "#/definitions/bits.pagination"
+                },
+                "data": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/definitions/Dialog"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Dialogs"
+        ],
+        "summary": "POST /dialogs",
+        "description": "create an entry",
+        "parameters": [
+          {
+            "name": "dialog",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Dialog"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "success",
+            "schema": {
+              "$ref": "#/definitions/Dialog"
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Dialogs"
+        ],
+        "summary": "PUT /dialogs",
+        "description": "replace entire collection",
+        "parameters": [
+          {
+            "name": "dialogs",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/DialogList"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "success"
+          }
+        }
+      }
+    },
+    "/dialogs/{id}": {
+      "get": {
+        "tags": [
+          "Dialogs"
+        ],
+        "summary": "GET /dialogs/{id}",
+        "description": "returns one entry",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "returns one entry",
+            "schema": {
+              "$ref": "#/definitions/Dialog"
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Dialogs"
+        ],
+        "summary": "PUT /dialogs/{id}",
+        "description": "replace one entry",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "dialog",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Dialog"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "success",
+            "schema": {
+              "$ref": "#/definitions/Dialog"
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Dialogs"
+        ],
+        "summary": "DELETE /dialogs/{id}",
+        "description": "delete one entry",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "success"
+          }
+        }
+      }
+    },
+    "/tagger": {
+      "post": {
+        "tags": [
+          "EntityTagger"
+        ],
+        "summary": "POST /tagger",
+        "description": "proxy to ai-engine Entity Tagging interface from dashboard-v1",
+        "parameters": [
+          {
+            "name": "tagger_request",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/TaggerRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "response with tagging information",
+            "schema": {
+              "$ref": "#/definitions/TaggerResponse"
+            }
+          }
+        }
+      }
+    },
+    "/tracer": {
+      "post": {
+        "tags": [
+          "Tracer"
+        ],
+        "summary": "POST /tracer",
+        "description": "proxy to ai-engine called from dashboard-v1 testing chat",
+        "parameters": [
+          {
+            "name": "tracer_request",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/TracerRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "bot response with debug information",
+            "schema": {
+              "$ref": "#/definitions/TracerResponse"
+            }
+          }
+        }
+      }
+    },
+    "/versions": {
+      "get": {
+        "tags": [
+          "Versions"
+        ],
+        "summary": "GET /versions",
+        "description": "returns versions",
+        "responses": {
+          "200": {
+            "description": "list of versions",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "apply": {
+                  "$ref": "#/definitions/Version"
+                },
+                "applied": {
+                  "$ref": "#/definitions/Version"
+                },
+                "all": {
+                  "$ref": "#/definitions/Version"
+                },
+                "entities": {
+                  "$ref": "#/definitions/Version"
+                },
+                "intents": {
+                  "$ref": "#/definitions/Version"
+                },
+                "dialogs": {
+                  "$ref": "#/definitions/Version"
+                },
+                "workflows": {
+                  "$ref": "#/definitions/Version"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/versions/{name}": {
+      "put": {
+        "tags": [
+          "Versions"
+        ],
+        "summary": "PUT /versions/{name}",
+        "description": "returns versions",
+        "parameters": [
+          {
+            "name": "name",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "entry",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Version"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "success"
+          }
+        }
+      }
+    },
+    "/workflows": {
+      "get": {
+        "tags": [
+          "Workflows"
+        ],
+        "summary": "GET /workflows",
+        "description": "returns all workflows",
+        "parameters": [
+          {
+            "name": "q",
+            "description": "free text search",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "required": false,
+            "type": "integer"
+          },
+          {
+            "name": "offset",
+            "in": "query",
+            "required": false,
+            "type": "integer"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "list of workflows",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "pagination": {
+                  "$ref": "#/definitions/bits.pagination"
+                },
+                "data": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/definitions/Workflow"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Workflows"
+        ],
+        "summary": "POST /workflows",
+        "description": "create an entry",
+        "parameters": [
+          {
+            "name": "workflow",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Workflow"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "success",
+            "schema": {
+              "$ref": "#/definitions/Workflow"
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Workflows"
+        ],
+        "summary": "PUT /workflows",
+        "description": "replace entire collection",
+        "parameters": [
+          {
+            "name": "workflows",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/WorkflowList"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "success"
+          }
+        }
+      }
+    },
+    "/workflows/{id}": {
+      "get": {
+        "tags": [
+          "Workflows"
+        ],
+        "summary": "GET /workflows/{id}",
+        "description": "returns one entry",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "returns one entry",
+            "schema": {
+              "$ref": "#/definitions/Workflow"
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Workflows"
+        ],
+        "summary": "PUT /workflows/{id}",
+        "description": "replace one entry",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "workflow",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Workflow"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "success",
+            "schema": {
+              "$ref": "#/definitions/Workflow"
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Workflows"
+        ],
+        "summary": "DELETE /workflows/{id}",
+        "description": "delete one entry",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "success"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "bits.pagination": {
+      "type": "object",
+      "properties": {
+        "rowCount": {
+          "type": "integer",
+          "default": 20
+        },
+        "pageCount": {
+          "type": "integer",
+          "default": 5
+        },
+        "limit": {
+          "type": "integer",
+          "default": 20
+        },
+        "offset": {
+          "type": "integer",
+          "default": 40
+        }
+      }
+    },
+    "Action": {
+      "type": "object",
+      "required": [
+        "name"
+      ],
+      "properties": {
+        "id": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "name": {
+          "type": "string",
+          "enum": [
+            "conversations.messages.create",
+            "actions.run",
+            "bot.pass",
+            "database.query"
+          ]
+        },
+        "payload": {
+          "$ref": "#/definitions/ActionPayload"
+        }
+      }
+    },
+    "ActionPayload": {
+      "type": "object",
+      "properties": {
+        "forked": {
+          "type": "boolean"
+        },
+        "message": {
+          "type": "object",
+          "properties": {
+            "payload": {
+              "$ref": "#/definitions/Message"
+            },
+            "metadata": {
+              "type": "object",
+              "properties": {
+                "response_to": {
+                  "type": "integer",
+                  "description": "Message id that this message is responding to."
+                },
+                "analytics": {
+                  "type": "object",
+                  "description": "A object that are needed for analytics"
+                }
+              }
+            }
+          }
+        },
+        "response_to": {
+          "type": "integer"
+        },
+        "custom_name": {
+          "description": "The command name set by the human agent.",
+          "type": "string"
+        },
+        "description": {
+          "description": "The description of an action which can be set by the human agent if it is a custom command.",
+          "type": "string"
+        },
+        "functions": {
+          "$ref": "#/definitions/Functions"
+        }
+      }
+    },
+    "Dialog": {
+      "type": "object",
+      "required": [
+        "name"
+      ],
+      "properties": {
+        "id": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "name": {
+          "type": "string",
+          "pattern": "^[a-zA-Z_][a-zA-Z.0-9\\s_]*$"
+        },
+        "payload": {
+          "$ref": "#/definitions/DialogPayload"
+        }
+      }
+    },
+    "DialogList": {
+      "type": "object",
+      "required": [
+        "data"
+      ],
+      "properties": {
+        "data": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Dialog"
+          }
+        }
+      }
+    },
+    "DialogPayload": {
+      "type": "object",
+      "required": [
+        "dialog_type",
+        "prompt"
+      ],
+      "properties": {
+        "dialog_type": {
+          "type": "string",
+          "enum": [
+            "text_type",
+            "list_type"
+          ]
+        },
+        "entity": {
+          "type": "string"
+        },
+        "prompt": {
+          "type": "string"
+        },
+        "reference_intent": {
+          "$ref": "#/definitions/Intent"
+        },
+        "text_type": {
+          "type": "object",
+          "properties": {
+            "alternative_ask": {
+              "type": "boolean",
+              "default": false
+            },
+            "alternative_ask_prompt": {
+              "type": "string"
+            },
+            "alternative_ask_limit": {
+              "type": "number",
+              "format": "integer",
+              "default": 1
+            },
+            "always_ask": {
+              "type": "boolean",
+              "default": false
+            },
+            "confirmation": {
+              "type": "boolean",
+              "default": false
+            },
+            "confirmation_prompt": {
+              "type": "string"
+            },
+            "success_actions": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/Unit"
+              }
+            },
+            "failure_actions": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/Unit"
+              }
+            }
+          }
+        },
+        "list_type": {
+          "type": "object",
+          "properties": {
+            "response_values": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/ListTypeValues"
+              }
+            }
+          }
+        }
+      }
+    },
+    "Entity": {
+      "type": "object",
+      "required": [
+        "name"
+      ],
+      "properties": {
+        "name": {
+          "type": "string",
+          "pattern": "^[a-zA-Z_][[a-zA-Z.0-9\\s_]+$",
+          "example": "order_number"
+        },
+        "entity_source_id": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "type": {
+          "type": "string",
+          "enum": [
+            "sys.currency",
+            "sys.date_time",
+            "sys.date_time.date",
+            "sys.date_time.day",
+            "sys.date_time.day_of_week",
+            "sys.date_time.hour",
+            "sys.date_time.minute",
+            "sys.date_time.month",
+            "sys.date_time.time",
+            "sys.email",
+            "sys.location.address",
+            "sys.location.city",
+            "sys.location.country",
+            "sys.location.street_address",
+            "sys.location.us_state",
+            "sys.location.zipcode",
+            "sys.person_name",
+            "sys.person_name.first_name",
+            "sys.person_name.last_name",
+            "sys.person_name.middle_name",
+            "sys.phone_number",
+            "sys.time",
+            "sys.url",
+            "product",
+            "custom.regex",
+            "custom.list"
+          ],
+          "example": "custom"
+        },
+        "example": {
+          "type": "string",
+          "default": "",
+          "example": "1982-01-23"
+        },
+        "validator": {
+          "type": "string",
+          "default": "",
+          "example": "#?(GIL\\d{8}[A-Z]{1,2})(?:\\W|$)"
+        },
+        "description": {
+          "type": "string",
+          "default": "",
+          "example": "Name of product."
+        },
+        "items": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "output_format": {
+          "type": "string",
+          "default": ""
+        },
+        "attribute": {
+          "type": "string",
+          "default": ""
+        }
+      }
+    },
+    "EntityUpdate": {
+      "type": "object",
+      "required": [
+        "entity_source_id"
+      ],
+      "properties": {
+        "name": {
+          "type": "string",
+          "pattern": "^[a-zA-Z_][[a-zA-Z.0-9\\s_]+$",
+          "example": "order_number"
+        },
+        "entity_source_id": {
+          "type": "integer",
+          "format": "int64",
+          "example": 12
+        },
+        "description": {
+          "type": "string",
+          "default": "",
+          "example": "Name of product."
+        }
+      }
+    },
+    "EntityList": {
+      "type": "object",
+      "required": [
+        "data"
+      ],
+      "properties": {
+        "data": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Entity"
+          }
+        }
+      }
+    },
+    "EntitySource": {
+      "type": "object",
+      "required": [
+        "type",
+        "name"
+      ],
+      "properties": {
+        "id": {
+          "type": "integer",
+          "format": "int64",
+          "example": 32
+        },
+        "type": {
+          "type": "string",
+          "enum": [
+            "sys",
+            "product",
+            "user",
+            "custom.list",
+            "custom.regex"
+          ]
+        },
+        "name": {
+          "type": "string",
+          "example": "product"
+        },
+        "validator": {
+          "type": "string",
+          "example": "#?(GIL\\d{8}[A-Z]{1,2})(?:\\W|$)"
+        },
+        "output_format": {
+          "type": "string",
+          "example": "MM/DD/YYYY"
+        },
+        "description": {
+          "type": "string",
+          "default": "",
+          "example": "System date"
+        },
+        "example": {
+          "type": "string",
+          "default": "",
+          "example": "1982-01-23"
+        },
+        "items": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "attribute": {
+          "type": "string",
+          "default": ""
+        }
+      }
+    },
+    "ProductEntity": {
+      "type": "object",
+      "required": [
+        "name"
+      ],
+      "properties": {
+        "name": {
+          "type": "string",
+          "example": "name"
+        },
+        "description": {
+          "type": "string",
+          "example": "Name of brand"
+        },
+        "example": {
+          "type": "string",
+          "example": "Infant Car Seat Carrier Stroller"
+        }
+      },
+      "example": {
+        "name": "name",
+        "description": "Name of product",
+        "example": "Infant Car Seat Carrier Stroller"
+      }
+    },
+    "Functions": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "function_name",
+          "command_name"
+        ],
+        "properties": {
+          "function_name": {
+            "type": "string",
+            "enum": [
+              "/alert_agent",
+              "/alert_team",
+              "/assign_agent",
+              "/assign_team",
+              "/bot",
+              "/categorize",
+              "/complete",
+              "/escalate",
+              "/indicate_typing",
+              "/note",
+              "/end_workflow",
+              "/show_form",
+              "/tag"
+            ]
+          },
+          "command_name": {
+            "type": "string",
+            "enum": [
+              "agents.alert",
+              "conversations.teams.alert",
+              "conversations.agents.attach",
+              "conversations.teams.attach",
+              "conversations.categories.attach",
+              "conversations.close",
+              "conversations.escalate",
+              "conversations.show.typing",
+              "conversations.agents.notes.create",
+              "workflows.end",
+              "forms.show",
+              "bot.pass",
+              "conversations.tags.attach"
+            ]
+          },
+          "alert_agent": {
+            "$ref": "#/definitions/CommandWithIntStringParams"
+          },
+          "alert_team": {
+            "$ref": "#/definitions/CommandWithIntStringParams"
+          },
+          "assign_team": {
+            "$ref": "#/definitions/CommandWithIntStringParams"
+          },
+          "bot": {
+            "$ref": "#/definitions/CommandWithBooleanParams"
+          },
+          "categorize": {
+            "$ref": "#/definitions/CommandWithIntStringParams"
+          },
+          "complete": {
+            "$ref": "#/definitions/CommandWithBooleanParams"
+          },
+          "escalate": {
+            "$ref": "#/definitions/CommandEscalate"
+          },
+          "indicate_typing": {
+            "$ref": "#/definitions/CommandIndicateTyping"
+          },
+          "note": {
+            "$ref": "#/definitions/CommandWithIntStringParams"
+          },
+          "end_workflow": {
+            "$ref": "#/definitions/CommandWithBooleanParams"
+          },
+          "show_form": {
+            "$ref": "#/definitions/CommandWithIntStringParams"
+          },
+          "tag": {
+            "$ref": "#/definitions/CommandWithIntStringParams"
+          }
+        }
+      }
+    },
+    "Intent": {
+      "type": "object",
+      "required": [
+        "name"
+      ],
+      "properties": {
+        "id": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "name": {
+          "type": "string",
+          "pattern": "^[a-zA-Z_][a-zA-Z.0-9\\s_]*$"
+        },
+        "payload": {
+          "$ref": "#/definitions/IntentPayload"
+        },
+        "actions": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Unit"
+          }
+        },
+        "expressions": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/IntentExpression"
+          }
+        }
+      }
+    },
+    "IntentPayload": {
+      "type": "object",
+      "required": [
+        "entities",
+        "tagged_entities"
+      ],
+      "properties": {
+        "priority": {
+          "type": "integer",
+          "default": 0
+        },
+        "entities": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Entity"
+          },
+          "default": []
+        },
+        "tagged_entities": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/TaggedEntity"
+          },
+          "default": []
+        }
+      }
+    },
+    "TaggedEntity": {
+      "type": "object",
+      "required": [
+        "name"
+      ],
+      "properties": {
+        "name": {
+          "type": "string",
+          "pattern": "^[a-zA-Z_][[a-zA-Z.0-9\\s_]+$",
+          "example": "order_number"
+        },
+        "resolved_value": {
+          "type": "string",
+          "example": "A12345"
+        },
+        "start_index": {
+          "type": "integer",
+          "format": "int64",
+          "example": 1
+        },
+        "end_index": {
+          "type": "integer",
+          "format": "int64",
+          "example": 10
+        },
+        "expression_index": {
+          "type": "integer",
+          "example": 0
+        },
+        "tag_source": {
+          "type": "string",
+          "enum": [
+            "human",
+            "ai"
+          ]
+        },
+        "message_source": {
+          "type": "string",
+          "enum": [
+            "intent",
+            "dialog",
+            "tag",
+            "test",
+            "workflow"
+          ]
+        },
+        "dialog_id": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "message_id": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "workflow_id": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "extras": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "example": {
+            "foo": "bar"
+          }
+        }
+      }
+    },
+    "TaggerRequest": {
+      "type": "object",
+      "required": [
+        "entities",
+        "expressions"
+      ],
+      "properties": {
+        "entities": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Entity"
+          }
+        },
+        "expressions": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/IntentExpression"
+          }
+        },
+        "tagged_entities": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/TaggedEntity"
+          }
+        }
+      }
+    },
+    "TaggerResponse": {
+      "type": "object",
+      "required": [
+        "entities",
+        "expressions"
+      ],
+      "properties": {
+        "entities": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Entity"
+          }
+        },
+        "expressions": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/IntentExpression"
+          }
+        },
+        "tagged_entities": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/TaggedEntity"
+          }
+        }
+      }
+    },
+    "TracerRequest": {
+      "type": "object",
+      "required": [
+        "events",
+        "context"
+      ],
+      "properties": {
+        "context": {
+          "type": "object",
+          "properties": {
+            "conversation": {
+              "type": "object",
+              "required": [
+                "id"
+              ],
+              "properties": {
+                "id": {
+                  "type": "integer"
+                }
+              }
+            },
+            "entities": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "required": [
+                  "name",
+                  "value"
+                ],
+                "properties": {
+                  "name": {
+                    "type": "string"
+                  },
+                  "value": {
+                    "type": "string"
+                  }
+                }
+              }
+            },
+            "ai_state": {
+              "type": "object"
+            },
+            "message_history": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "required": [
+                  "payload",
+                  "sender_type"
+                ],
+                "properties": {
+                  "id": {
+                    "type": "integer"
+                  },
+                  "sender_type": {
+                    "type": "string"
+                  },
+                  "payload": {
+                    "type": "object",
+                    "required": [
+                      "content"
+                    ],
+                    "properties": {
+                      "content": {
+                        "type": "string"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "events": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "customer": {
+                "type": "object"
+              },
+              "conversation": {
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "type": "integer"
+                  }
+                }
+              },
+              "message": {
+                "type": "object",
+                "properties": {
+                  "conversation_id": {
+                    "type": "integer"
+                  },
+                  "payload": {
+                    "$ref": "#/definitions/Message"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "TracerResponse": {
+      "type": "object",
+      "required": [
+        "commands"
+      ],
+      "properties": {
+        "ai_state": {
+          "type": "object"
+        },
+        "entities": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": [
+              "name",
+              "value"
+            ],
+            "properties": {
+              "name": {
+                "type": "string"
+              },
+              "value": {
+                "type": "string"
+              }
+            }
+          }
+        },
+        "commands": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": [
+              "name",
+              "payload"
+            ],
+            "properties": {
+              "name": {
+                "type": "string"
+              },
+              "payload": {
+                "type": "object"
+              }
+            }
+          }
+        },
+        "debug": {
+          "type": "object"
+        }
+      }
+    },
+    "Workflow": {
+      "type": "object",
+      "required": [
+        "name"
+      ],
+      "properties": {
+        "id": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "name": {
+          "type": "string",
+          "pattern": "^[a-zA-Z_][a-zA-Z.0-9\\s_]*$"
+        },
+        "payload": {
+          "$ref": "#/definitions/WorkflowPayload"
+        }
+      }
+    },
+    "WorkflowList": {
+      "type": "object",
+      "required": [
+        "data"
+      ],
+      "properties": {
+        "data": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Workflow"
+          }
+        }
+      }
+    },
+    "WorkflowPayload": {
+      "type": "object",
+      "properties": {
+        "states": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Unit"
+          }
+        },
+        "success_actions": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Unit"
+          }
+        },
+        "failure_actions": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Unit"
+          }
+        }
+      }
+    },
+    "Version": {
+      "type": "object",
+      "properties": {
+        "updated_at": {
+          "type": "string",
+          "format": "dateTime",
+          "default": "2017-05-15T16:20:37.586Z"
+        }
+      }
+    },
+    "Unit": {
+      "type": "object",
+      "required": [
+        "name",
+        "unit_type"
+      ],
+      "properties": {
+        "id": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "name": {
+          "type": "string",
+          "pattern": "^[a-zA-Z_][a-zA-Z.0-9\\s_]*$"
+        },
+        "unit_type": {
+          "type": "string",
+          "enum": [
+            "action",
+            "dialog",
+            "workflow"
+          ]
+        },
+        "payload": {
+          "type": "object",
+          "enum": [
+            {
+              "$ref": "#/definitions/ActionPayload"
+            },
+            {
+              "$ref": "#/definitions/DialogPayload"
+            },
+            {
+              "$ref": "#/definitions/WorkflowPayload"
+            }
+          ]
+        },
+        "rank": {
+          "type": "integer",
+          "format": "int64"
+        }
+      }
+    },
+    "ListTypeValues": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "string"
+        },
+        "actions": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Unit"
+          }
+        }
+      }
+    },
+    "CommandWithIntStringParams": {
+      "type": "object",
+      "properties": {
+        "arguments": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": {
+            "type": "object",
+            "required": [
+              "id"
+            ],
+            "properties": {
+              "id": {
+                "type": "integer",
+                "format": "int64"
+              },
+              "name": {
+                "type": "string"
+              }
+            }
+          }
+        }
+      }
+    },
+    "CommandWithBooleanParams": {
+      "type": "object",
+      "properties": {
+        "arguments": {
+          "type": "boolean"
+        }
+      }
+    },
+    "CommandEscalate": {
+      "type": "object",
+      "properties": {
+        "arguments": {
+          "type": "string",
+          "enum": [
+            "high",
+            "medium",
+            "low"
+          ]
+        }
+      }
+    },
+    "CommandIndicateTyping": {
+      "type": "object",
+      "properties": {
+        "arguments": {
+          "type": "integer"
+        },
+        "options": {
+          "type": "object",
+          "properties": {
+            "delay_by_seconds": {
+              "type": "integer"
+            }
+          }
+        }
+      }
+    },
+    "Message": {
+      "type": "object",
+      "description": "Types of messages inside actions. payload varies based on message_type.",
+      "properties": {
+        "message_type": {
+          "type": "string",
+          "enum": [
+            "rich_text",
+            "reply",
+            "replies",
+            "file",
+            "card",
+            "asset"
+          ]
+        },
+        "content": {
+          "description": "This type is used for backward compatibility.",
+          "type": "string"
+        },
+        "rich_text": {
+          "$ref": "#/definitions/RichTextMessageType"
+        },
+        "asset": {
+          "$ref": "#/definitions/AssetMessageType"
+        },
+        "reply": {
+          "$ref": "#/definitions/ReplyMessageType"
+        },
+        "replies": {
+          "$ref": "#/definitions/RepliesMessageType"
+        },
+        "file": {
+          "$ref": "#/definitions/FileMessageType"
+        },
+        "card": {
+          "$ref": "#/definitions/CardMessageType"
+        }
+      },
+      "example": {
+        "message_type": "replies",
+        "replies": {
+          "content": "Please select your answer.",
+          "attachments": [
+            {
+              "message_type": "reply",
+              "reply": {
+                "content": "Yes",
+                "url": "/handle_reply",
+                "postback": {
+                  "paylod": "{\"value\": \"yes\", \"index\": 0}",
+                  "reply_to": 133
+                }
+              }
+            },
+            {
+              "message_type": "reply",
+              "reply": {
+                "content": "No",
+                "url": "/handle_reply",
+                "postback": {
+                  "payload": "{\"value\": \"no\", \"index\": 1}",
+                  "reply_to": 133
+                }
+              }
+            }
+          ]
+        }
+      }
+    },
+    "RichTextMessageType": {
+      "type": "object",
+      "properties": {
+        "content": {
+          "type": "string"
+        },
+        "attachments": {
+          "type": "array",
+          "description": "this is an optional field that may contains other messages that go with this text.",
+          "items": {
+            "$ref": "#/definitions/Message"
+          }
+        }
+      },
+      "example": {
+        "content": "Hi, it is nice weather today!"
+      }
+    },
+    "ReplyMessageType": {
+      "type": "object",
+      "description": "This message is used when bot wants user to browse or send back a message.",
+      "properties": {
+        "content": {
+          "type": "string",
+          "example": "Yes"
+        },
+        "url": {
+          "type": "string"
+        },
+        "postback": {
+          "type": "object",
+          "properties": {
+            "payload": {
+              "type": "string",
+              "example": "{\"value\": \"yes\", \"index\": 1}"
+            },
+            "reply_to": {
+              "type": "integer",
+              "example": 133
+            }
+          },
+          "description": "custom payload to send data along with request."
+        }
+      },
+      "example": {
+        "content": "Yes",
+        "url": "http://test.com/product/mxs-230.html",
+        "postback": {
+          "payload": "{\"value\": \"yes\", \"index\": 1}",
+          "reply_to": 133
+        }
+      }
+    },
+    "RepliesMessageType": {
+      "type": "object",
+      "properties": {
+        "content": {
+          "type": "string",
+          "example": "Please select your answer."
+        },
+        "attachments": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Message"
+          },
+          "example": [
+            {
+              "foo": null,
+              "message_type": "reply",
+              "reply": {
+                "content": "Yes",
+                "url": "/handle_reply",
+                "postback": {
+                  "payload": "{\"value\": \"yes\", \"index\": 0}",
+                  "reply_to": 133
+                }
+              }
+            },
+            {
+              "bar": null,
+              "message_type": "reply",
+              "reply": {
+                "content": "No",
+                "url": "/handle_reply",
+                "postback": {
+                  "payload": "{\"value\": \"no\", \"index\": 1}",
+                  "reply_to": 133
+                }
+              }
+            }
+          ]
+        }
+      }
+    },
+    "FileMessageType": {
+      "type": "object",
+      "description": "A file that can be specified by url. Mostly used externally.",
+      "required": [
+        "mediaType"
+      ],
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "mediaUrl": {
+          "type": "string"
+        },
+        "mediaType": {
+          "type": "string",
+          "enum": [
+            "default",
+            "image"
+          ]
+        },
+        "metadata": {
+          "type": "object"
+        }
+      },
+      "example": {
+        "name": "company logo",
+        "mediaUrl": "http://test.com/company_logo.jpg",
+        "mediaType": "image",
+        "metadata": {
+          "size": 347834,
+          "height": 234,
+          "width": 324
+        }
+      }
+    },
+    "AssetMessageType": {
+      "type": "object",
+      "description": "Asset that needs to be retrieved on the fly through our service",
+      "required": [
+        "asset_id"
+      ],
+      "properties": {
+        "asset_id": {
+          "type": "integer"
+        }
+      },
+      "example": {
+        "asset_id": 344
+      }
+    },
+    "CardMessageType": {
+      "type": "object",
+      "properties": {
+        "title": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        },
+        "imageUrl": {
+          "type": "string"
+        },
+        "attachments": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Message"
+          }
+        }
+      }
+    },
+    "IntentAction": {
+      "type": "object",
+      "required": [
+        "name"
+      ],
+      "properties": {
+        "id": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "name": {
+          "type": "string"
+        },
+        "payload": {
+          "type": "object"
+        }
+      }
+    },
+    "IntentExpression": {
+      "type": "object",
+      "required": [
+        "template"
+      ],
+      "properties": {
+        "template": {
+          "type": "string"
+        },
+        "source": {
+          "type": "string",
+          "enum": [
+            "iq-tools",
+            "instant-ai"
+          ],
+          "default": "iq-tools"
+        },
+        "matcher": {
+          "type": "string",
+          "enum": [
+            "default",
+            "exact"
+          ],
+          "default": "default"
+        }
+      }
+    },
+    "IntentList": {
+      "type": "object",
+      "required": [
+        "data"
+      ],
+      "properties": {
+        "data": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Intent"
+          }
+        }
+      }
+    }
+  }
+}

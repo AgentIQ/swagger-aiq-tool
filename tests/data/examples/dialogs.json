@@ -1,0 +1,212 @@
+{
+  "data": [
+    {
+      "id": 87,
+      "name": "ask_current_address",
+      "payload": {
+        "entity": "address",
+        "prompt": "What is your current address?",
+        "text_type": {
+          "always_ask": false,
+          "confirmation": false,
+          "alternative_ask": false,
+          "failure_actions": [
+            {
+              "id": 1413,
+              "name": "conversations.messages.create",
+              "unit_type": "action",
+              "payload": {
+                "message": {
+                  "payload": {
+                    "content": "Our Sensor blades are starting at about $1 per blade and you receive 8 blades per order. Our Mach3 Turbo is under $2 per blade and you receive 5 blades per order. Finally, our ProShield is less than $4 per blade and you’re receiving 4 blades per order!"
+                  }
+                }
+              }
+            }
+          ],
+          "success_actions": [
+            {
+              "id": 1412,
+              "name": "conversations.messages.create",
+              "unit_type": "action",
+              "payload": {
+                "message": {
+                  "payload": {
+                    "content": "To start, you'll receive a free handle and $3 off your first order - making ProShield $18.45. All following orders will be $21.45.  If you choose to subscribe, every 4th order will be free!"
+                  }
+                }
+              }
+
+            }
+          ],
+          "confirmation_prompt": "",
+          "alternative_ask_limit": 1,
+          "alternative_ask_prompt": ""
+        },
+        "dialog_type": "text_type"
+      }
+    },
+    {
+      "id": 21,
+      "name": "check_coupon_validity",
+      "payload": {
+        "entity": "",
+        "prompt": "Is your coupon valid today?",
+        "list_type": {
+          "response_values": [
+            {
+              "value": "Yes, it is valid.",
+              "actions": [
+                {
+                  "id": 1217,
+                  "name": "conversations.messages.create",
+                  "unit_type": "action",
+                  "payload": {
+                    "message": {
+                      "payload": {
+                        "content": "Our Sensor blades are starting at about $1 per blade and you receive 8 blades per order. Our Mach3 Turbo is under $2 per blade and you receive 5 blades per order. Finally, our ProShield is less than $4 per blade and you’re receiving 4 blades per order!"
+                      }
+                    }
+                  }
+                }
+              ]
+            },
+            {
+              "value": "No, it is outdated.",
+              "actions": [
+                {
+                  "id": 977,
+                  "name": "conversations.messages.create",
+                  "unit_type": "action",
+                  "payload": {
+                    "message": {
+                      "payload": {
+                        "content": "I can't understand!"
+                      }
+                    }
+                  }
+                },
+                {
+                  "id": 303,
+                  "name": "bot.pass",
+                  "unit_type": "action",
+                  "payload": {
+                    "message": {
+                      "payload": {
+                        "content": "Sorry."
+                      }
+                    }
+                  }
+                }
+              ]
+            },
+            {
+              "value": "I'm not sure.w",
+              "actions": []
+            }
+          ]
+        },
+        "dialog_type": "list_type"
+      }
+    },
+    {
+      "id": 86,
+      "name": "check_test",
+      "payload": {
+        "entity": "",
+        "prompt": "testing",
+        "list_type": {
+          "response_values": [
+            {
+              "value": "yes",
+              "actions": [
+                {
+                  "id": 21,
+                  "name": "check_coupon_validity",
+                  "unit_type": "dialog",
+                  "payload": {
+                    "entity": "",
+                    "prompt": "Is your coupon valid today?",
+                    "list_type": {
+                      "response_values": [
+                        {
+                          "value": "Yes, it is valid.",
+                          "actions": [
+                            {
+                              "id": 1217,
+                              "name": "conversations.messages.create",
+                              "unit_type": "action",
+                              "payload": {
+                                "message": {
+                                  "payload": {
+                                    "content": "Our Sensor blades are starting at about $1 per blade and you receive 8 blades per order. Our Mach3 Turbo is under $2 per blade and you receive 5 blades per order. Finally, our ProShield is less than $4 per blade and you’re receiving 4 blades per order!"
+                                  }
+                                }
+                              }
+                            }
+                          ]
+                        },
+                        {
+                          "value": "No, it is outdated.",
+                          "actions": [
+                            {
+                              "id": 977,
+                              "name": "conversations.messages.create",
+                              "unit_type": "action",
+                              "payload": {
+                                "message": {
+                                  "payload": {
+                                    "content": "I can't understand!"
+                                  }
+                                }
+                              }
+                            },
+                            {
+                              "id": 303,
+                              "name": "bot.pass",
+                              "unit_type": "action",
+                              "payload": {
+                                "message": {
+                                  "payload": {
+                                    "content": "Sorry."
+                                  }
+                                }
+                              }
+                            }
+                          ]
+                        },
+                        {
+                          "value": "I'm not sure.w",
+                          "actions": []
+                        }
+                      ]
+                    },
+                    "dialog_type": "list_type"
+                  }
+                }
+              ]
+            },
+            {
+              "value": "no",
+              "actions": [
+                {
+                  "id": 1407,
+                  "name": "conversations.messages.create",
+                  "unit_type": "action",
+                  "payload": {
+                    "message": {
+                      "payload": {
+                        "content": "Sorry about that."
+                      }
+                    }
+                  }
+                }
+              ]
+            }
+          ]
+        },
+        "dialog_type": "list_type"
+      }
+    }
+  ]
+}

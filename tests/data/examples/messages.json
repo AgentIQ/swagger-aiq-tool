@@ -1,0 +1,60 @@
+{
+  "data": [
+    {
+      "content": "this is legacy message"
+    },
+    {
+      "message_type": "rich_text",
+      "rich_text": {
+        "content": "this is rich_text",
+        "attachments": [ ]
+      }
+    },
+    {
+      "message_type": "rich_text",
+      "rich_text": {
+        "content": "this is rich_text",
+        "attachments": [{
+          "content": "this is one message"
+        },
+        {
+          "content": "this is two message"
+        },
+        {
+
+          "message_type": "rich_text",
+          "rich_text": {
+            "content": "this is rich_text",
+            "attachments": [ ]
+          }
+        }
+        ]
+      }
+    },
+    {
+      "message_type": "replies",
+      "replies": {
+        "attachments": [
+          {
+            "message_type": "reply",
+            "reply": {
+              "content": "yes",
+              "postback": {
+                "payload": "{ }"
+              }
+            }
+          },
+          {
+            "message_type": "reply",
+            "reply": {
+              "content": "no",
+              "postback": {
+                "payload": "{ }"
+              }
+            }
+          }
+        ]
+      }
+    }
+  ]
+}

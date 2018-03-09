@@ -1,0 +1,29 @@
+{
+  "name": "swagger-aiq-tool",
+  "version": "0.5.0",
+  "description": "swagger middleware and validator that support circular definition reference and enumeration of object.",
+  "main": "index.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/AgentIQ/swagger-aiq-tool.git"
+  },
+  "keywords": [
+    "swagger",
+    "validator",
+    "middleware"
+  ],
+  "author": "Jaekwan Lee",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/AgentIQ/swagger-aiq-tool/issues"
+  },
+  "devDependencies": {
+    "eslint": "^4.6.1",
+    "jasme": "^5.2.0",
+    "semistandard": "^10.0.0"
+  },
+  "scripts": {
+    "test": "node ./node_modules/jasme/run.js"
+  },
+  "homepage": "https://github.com/AgentIQ/swagger-aiq-tool#readme"
+}
