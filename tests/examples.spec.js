@@ -4,10 +4,11 @@ const definitions = require('./samples/swagger').definitions;
 const Validator = require('../libs/validator').Validator;
 const dialogs = require('./data/examples/dialogs');
 const messages = require('./data/examples/messages');
-const commands = require('./data/examples/commands');
 const workflows = require('./data/examples/workflows');
 const entities = require('./data/examples/entities');
 const intents = require('./data/examples/intents');
+// TODO: add commands
+//const commands = require('./data/examples/commands');
 
 describe('Validator - validate examples', () => {
   it('Validate simple object', (done) => {
@@ -52,7 +53,7 @@ describe('Validator - validate examples', () => {
     for (let test_set of dialogs.data) {
       promises.push(v.validate({ '$ref': '#/definitions/Dialog' }, test_set));
     }
-    Promise.all(promises).then(() => done())
+    Promise.all(promises).then(() => done());
   });
 
   it('Validate message objects using definition', (done) => {
@@ -61,7 +62,7 @@ describe('Validator - validate examples', () => {
     for (let test_set of messages.data) {
       promises.push(v.validate({ '$ref': '#/definitions/Message' }, test_set));
     }
-    Promise.all(promises).then(() => done())
+    Promise.all(promises).then(() => done());
   });
 
   it('Validate workflow objects using definition', (done) => {
@@ -70,7 +71,7 @@ describe('Validator - validate examples', () => {
     for (let test_set of workflows.data) {
       promises.push(v.validate({ '$ref': '#/definitions/Message' }, test_set));
     }
-    Promise.all(promises).then(() => done())
+    Promise.all(promises).then(() => done());
   });
 
   it('Validate intent objects using definition', (done) => {
@@ -79,7 +80,7 @@ describe('Validator - validate examples', () => {
     for (let test_set of intents.data) {
       promises.push(v.validate({ '$ref': '#/definitions/Intent' }, test_set));
     }
-    Promise.all(promises).then(() => done())
+    Promise.all(promises).then(() => done());
   });
 
   it('Validate a definition refered entity object', (done) => {
@@ -88,7 +89,7 @@ describe('Validator - validate examples', () => {
     for (let test_set of entities.data) {
       promises.push(v.validate({ '$ref': '#/definitions/Entity' }, test_set));
     }
-    Promise.all(promises).then(() => done())
+    Promise.all(promises).then(() => done());
   });
 
   it('Validate a recursive object', (done) => {

@@ -25,7 +25,7 @@ function throwError(name, reason, path, extra=null) {
   throw error;
 }
 
-module.exports = { throwError, 
+module.exports = { throwError,
   error_type: {
     INVALID_FIELD_EXISTS,
     MISSING_REQUIRED_FIELD,

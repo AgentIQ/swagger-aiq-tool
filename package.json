@@ -23,7 +23,8 @@
     "semistandard": "^10.0.0"
   },
   "scripts": {
-    "test": "node ./node_modules/jasme/run.js"
+    "test": "node ./node_modules/jasme/run.js",
+    "lint": "./node_modules/eslint/bin/eslint.js ."
   },
   "homepage": "https://github.com/AgentIQ/swagger-aiq-tool#readme"
 }
