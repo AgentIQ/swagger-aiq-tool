@@ -23,6 +23,18 @@ const app = express();
 // expect schema to be js object
 app.use(tool.createMiddleware(schema));
 ```
+Validator
+-----------
+If you want to use validator seperately, it is available in the tool.
+```
+const Validator = require('swagger-aiq-tool').Validator;
+
+const myValidator = new Validator();
+myValidator.validate(jsonSchema, jsonData)
+  .then(() => console.log('Success');
+  .catch(err => console.log('Failed');
+```
+
 
 Development
 =========================
