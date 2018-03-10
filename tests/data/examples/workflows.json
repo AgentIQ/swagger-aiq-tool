@@ -1,3 +1,321 @@
 {
-  "data": []
+  "data": [
+    {
+      "id": 1,
+      "name": "cancel_order",
+      "payload": {
+        "states": [
+          {
+            "id": 3,
+            "name": "conversations.messages.create",
+            "unit_type": "action",
+            "payload": {
+              "message": {
+                "payload": {
+                  "content": "@product.resolved_value is $@product.price"
+                }
+              }
+            }
+          },
+          {
+            "id": 39,
+            "name": "bot.pass",
+            "unit_type": "action",
+            "payload": {}
+          },
+          {
+            "id": 38,
+            "name": "conversations.messages.create",
+            "unit_type": "action",
+            "payload": {
+              "message": {
+                "payload": {
+                  "content": "  Yes, you will be charged tax based on your local area."
+                }
+              }
+            }
+          }
+        ],
+        "failure_actions": [
+          {
+            "id": 5,
+            "name": "conversations.messages.create",
+            "unit_type": "action",
+            "payload": {
+              "message": {
+                "payload": {
+                  "content": "I'm so sorry to hear that. Where did you lose it?"
+                }
+              }
+            }
+          }
+        ],
+        "success_actions": [
+          {
+            "id": 86,
+            "name": "check_test",
+            "unit_type": "dialog",
+            "payload": {
+              "entity": "",
+              "prompt": "testing",
+              "list_type": {
+                "response_values": [
+                  {
+                    "value": "yes",
+                    "actions": [
+                      {
+                        "id": 21,
+                        "name": "check_coupon_validity",
+                        "unit_type": "dialog",
+                        "payload": {
+                          "entity": "",
+                          "prompt": "Is your coupon valid today?",
+                          "list_type": {
+                            "response_values": [
+                              {
+                                "value": "Yes, it is valid.",
+                                "actions": [
+                                  {
+                                    "id": 1217,
+                                    "name": "conversations.messages.create",
+                                    "unit_type": "action",
+                                    "payload": {
+                                      "message": {
+                                        "payload": {
+                                          "content": "Our Sensor blades are starting at about $1 per blade and you receive 8 blades per order. Our Mach3 Turbo is under $2 per blade and you receive 5 blades per order. Finally, our ProShield is less than $4 per blade and you’re receiving 4 blades per order!"
+                                        }
+                                      }
+                                    }
+                                  }
+                                ]
+                              },
+                              {
+                                "value": "No, it is outdated.",
+                                "actions": [
+                                  {
+                                    "id": 977,
+                                    "name": "conversations.messages.create",
+                                    "unit_type": "action",
+                                    "payload": {
+                                      "message": {
+                                        "payload": {
+                                          "content": "I can't understand!"
+                                        }
+                                      }
+                                    }
+                                  },
+                                  {
+                                    "id": 303,
+                                    "name": "bot.pass",
+                                    "unit_type": "action",
+                                    "payload": {
+                                      "message": {
+                                        "payload": {
+                                          "content": "Sorry."
+                                        }
+                                      }
+                                    }
+                                  }
+                                ]
+                              },
+                              {
+                                "value": "I'm not sure.w",
+                                "actions": []
+                              }
+                            ]
+                          },
+                          "dialog_type": "list_type"
+                        }
+                      }
+                    ]
+                  },
+                  {
+                    "value": "no",
+                    "actions": [
+                      {
+                        "id": 1407,
+                        "name": "conversations.messages.create",
+                        "unit_type": "action",
+                        "payload": {
+                          "message": {
+                            "payload": {
+                              "content": "Sorry about that."
+                            }
+                          }
+                        }
+                      }
+                    ]
+                  }
+                ]
+              },
+              "dialog_type": "list_type"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": 0,
+      "name": "check_order_status",
+      "payload": {
+        "states": [
+          {
+            "id": 54,
+            "name": "actions.run",
+            "unit_type": "action",
+            "payload": {
+              "custom_name": "end_the_workflow",
+              "description": "Stop the workflow",
+              "functions": [
+                {
+                  "function_name": "/end_workflow",
+                  "command_name": "workflows.end",
+                  "params": {
+                    "arguments": true
+                  }
+                }
+              ]
+            }
+          },
+          {
+            "id": 65,
+            "name": "actions.run",
+            "unit_type": "action",
+            "payload": {
+              "description": "",
+              "functions": [
+                {
+                  "command_name": "conversations.teams.attach",
+                  "function_name": "/assign_team",
+                  "params": {
+                    "arguments": [
+                      {
+                        "id": 1
+                      }
+                    ]
+                  }
+                }
+              ]
+            }
+          }
+        ],
+        "failure_actions": [
+          {
+            "id": 4,
+            "name": "check_order_zipcode",
+            "unit_type": "workflow",
+            "payload": {
+              "states": [
+                {
+                  "id": 41,
+                  "name": "conversations.messages.create",
+                  "unit_type": "action"
+                },
+                {
+                  "id": 27,
+                  "name": "get_order_zipcode",
+                  "unit_type": "dialog"
+                },
+                {
+                  "id": 22,
+                  "name": "get_order_date",
+                  "unit_type": "dialog"
+                }
+              ],
+              "failure_actions": [
+                {
+                  "id": 44,
+                  "name": "conversations.messages.create",
+                  "unit_type": "action"
+                }
+              ],
+              "success_actions": [
+                {
+                  "id": 53,
+                  "name": "conversations.messages.create",
+                  "unit_type": "action"
+                }
+              ]
+            }
+          }
+
+        ],
+        "success_actions": [
+          {
+            "id": 67,
+            "name": "conversations.messages.create",
+            "unit_type": "action",
+            "payload": {
+              "message": {
+                "payload": {
+                  "content": "You are very welcome."
+                }
+              }
+            }
+          },
+          {
+            "id": 70,
+            "name" : "conversations.messages.create",
+            "unit_type": "action",
+            "payload" : {
+              "message": {
+                "payload" : {
+                  "content":"@product.product_name price is @product.product_price."
+                }
+              }
+            }
+          },
+          {
+            "id": 71,
+            "name" : "conversations.messages.create",
+            "unit_type": "action",
+            "payload" : {
+              "message": {
+                "payload" : {
+                  "content":"@product_name price is @product_price."
+                }
+              }
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": 4,
+      "name": "check_order_zipcode",
+      "payload": {
+        "states": [
+          {
+            "id": 41,
+            "name": "conversations.messages.create",
+            "unit_type": "action"
+          },
+          {
+            "id": 27,
+            "name": "get_order_zipcode",
+            "unit_type": "dialog"
+          },
+          {
+            "id": 22,
+            "name": "get_order_date",
+            "unit_type": "dialog"
+          }
+        ],
+        "failure_actions": [
+          {
+            "id": 44,
+            "name": "conversations.messages.create",
+            "unit_type": "action"
+          }
+        ],
+        "success_actions": [
+          {
+            "id": 53,
+            "name": "conversations.messages.create",
+            "unit_type": "action"
+          }
+        ]
+      }
+    }
+  ]
 }

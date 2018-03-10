@@ -1,0 +1,349 @@
+{
+  "data": [
+    {
+      "id": 3,
+      "name": "conversations.messages.create",
+      "payload": {
+        "message": {
+          "payload": {
+            "content": "@product.resolved_value is $@product.price"
+          }
+        }
+      }
+    },
+    {
+      "id": 39,
+      "name": "bot.pass",
+      "payload": {}
+    },
+    {
+      "id": 38,
+      "name": "conversations.messages.create",
+      "payload": {
+        "message": {
+          "payload": {
+            "content": "  Yes, you will be charged tax based on your local area."
+          }
+        }
+      }
+    },
+    {
+      "id": 40,
+      "name": "conversations.messages.create",
+      "payload": {
+        "message": {
+          "payload": {
+            "content": "A handle is included with your first order."
+          }
+        }
+      }
+    },
+    {
+      "id": 41,
+      "name": "conversations.messages.create",
+      "payload": {
+        "message": {
+          "payload": {
+            "content": "In order to help you, I need to verify some information."
+          }
+        }
+      }
+    },
+    {
+      "id": 42,
+      "name": "conversations.messages.create",
+      "payload": {
+        "message": {
+          "payload": {
+            "content": "Great. Thanks @customer_name.first_name."
+          }
+        }
+      }
+    },
+    {
+      "id": 43,
+      "name": "conversations.messages.create",
+      "payload": {
+        "message": {
+          "payload": {
+            "content": "Unfortunately, we are not able to help you. Please contact our customer service at 800-CUSTOMER."
+          }
+        }
+      }
+    },
+    {
+      "id": 44,
+      "name": "conversations.messages.create",
+      "payload": {
+        "message": {
+          "payload": {
+            "content": "Great. Thanks."
+          }
+        }
+      }
+    },
+    {
+      "id": 45,
+      "name": "conversations.messages.create",
+      "payload": {
+        "message": {
+          "payload": {
+            "content": "Looking in the database. Just a moment..."
+          }
+        }
+      }
+    },
+    {
+      "id": 48,
+      "name": "conversations.messages.create",
+      "payload": {
+        "message": {
+          "payload": {
+            "content": "Cancellation for order number @order_number was completed."
+          }
+        }
+      }
+    },
+    {
+      "id": 37,
+      "name": "conversations.messages.create",
+      "payload": {
+        "message": {
+          "payload": {
+            "content": "A set includes 4 blade refills and handle for $21.45."
+          }
+        }
+      }
+    },
+    {
+      "id": 47,
+      "name": "database.query",
+      "payload": {
+        "message": {
+          "payload": {
+            "content": "update order from some table where customer_name is '@customer_name' and order_number is '@order_number' and order_date is '@order_date'"
+          }
+        }
+      }
+    },
+    {
+      "id": 46,
+      "name": "database.query",
+      "payload": {
+        "message": {
+          "payload": {
+            "content": "select order from some table where customer_name is '@customer_name' and order_number is '@order_number' and order_date is '@order_date'"
+          }
+        }
+      }
+    },
+    {
+      "id": 52,
+      "name": "database.query",
+      "payload": {
+        "message": {
+          "payload": {
+            "content": "select order_status from some_table where customer_name is '@customer_name' and order_number is '@order_number' and order_date is '@order_date'"
+          }
+        }
+      }
+    },
+    {
+      "id": 53,
+      "name" : "conversations.messages.create",
+      "payload" : {
+        "message": {
+          "payload" : {
+            "content":"your order should arrive in 2 days."
+          }
+        }
+      }
+    },
+    {
+      "id": 49,
+      "name" : "conversations.messages.create",
+      "payload" : {
+        "message": {
+          "payload" : {
+            "content":"Thanks for confirmation. We are deleting your order..."
+          }
+        }
+      }
+    },
+    {
+      "id": 50,
+      "name" : "conversations.messages.create",
+      "payload" : {
+        "message": {
+          "payload" : {
+            "content":"Thank you. Your order will remain unchained."
+          }
+        }
+      }
+    },
+    {
+      "id": 54,
+      "name": "actions.run",
+      "payload": {
+        "custom_name": "end_the_workflow",
+        "description": "Stop the workflow",
+        "functions": [
+          {
+            "function_name": "/end_workflow",
+            "command_name": "workflows.end",
+            "params": {
+              "arguments": true
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": 65,
+      "name": "actions.run",
+      "payload": {
+        "description": "",
+        "functions": [
+          {
+            "command_name": "conversations.teams.attach",
+            "function_name": "/assign_team",
+            "params": {
+              "arguments": [
+                {
+                  "id": 1
+                }
+              ]
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": 5,
+      "name": "conversations.messages.create",
+      "payload": {
+        "message": {
+          "payload": {
+            "content": "I'm so sorry to hear that. Where did you lose it?"
+          }
+        }
+      }
+    },
+    {
+      "id": 6,
+      "name": "conversations.messages.create",
+      "payload": {
+        "message": {
+          "payload": {
+            "content": "What would you like to know?"
+          }
+        }
+      }
+    },
+    {
+      "id": 7,
+      "name": "conversations.messages.create",
+      "payload": {
+        "message": {
+          "payload": {
+            "content": "Hello there @name."
+          }
+        }
+      }
+    },
+    {
+      "id": 8,
+      "name": "conversations.messages.create",
+      "payload": {
+        "message": {
+          "payload": {
+            "content": "I'm so sorry to hear that. Where did you lose it?"
+          }
+        }
+      }
+    },
+    {
+      "id": 9,
+      "name": "conversations.messages.create",
+      "payload": {
+        "message": {
+          "payload": {
+            "content": "What would you like to know?"
+          }
+        }
+      }
+    },
+    {
+      "id": 10,
+      "name": "conversations.messages.create",
+      "payload": {
+        "message": {
+          "payload": {
+            "content": "Great. Thanks."
+          }
+        }
+      }
+    },
+    {
+      "id": 11,
+      "name": "actions.run",
+      "payload": {
+        "custom_name": "end_the_workflow",
+        "description": "Stop the workflow",
+        "functions": [
+          {
+            "function_name": "/end_workflow",
+            "command_name": "workflows.end",
+            "params": {
+              "arguments": true
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": 66,
+      "name": "conversations.messages.create",
+      "payload": {
+        "message": {
+          "payload": {
+            "content": "Happy to help"
+          }
+        }
+      }
+    },
+    {
+      "id": 67,
+      "name": "conversations.messages.create",
+      "payload": {
+        "message": {
+          "payload": {
+            "content": "You are very welcome."
+          }
+        }
+      }
+    },
+    {
+      "id": 70,
+      "name" : "conversations.messages.create",
+      "payload" : {
+        "message": {
+          "payload" : {
+            "content":"@product.product_name price is @product.product_price."
+          }
+        }
+      }
+    },
+    {
+      "id": 71,
+      "name" : "conversations.messages.create",
+      "payload" : {
+        "message": {
+          "payload" : {
+            "content":"@product_name price is @product_price."
+          }
+        }
+      }
+    }
+  ]
+}
