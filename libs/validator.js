@@ -97,16 +97,22 @@ function Validator(swaggerDefinitions) {
           return;
         }
       }
-      throwError(INVALID_TYPE, 'Incorrect type. Type should be ' + schema.type.join(' or '), path);
+      throwError(INVALID_TYPE,
+          'Incorrect type. Type should be ' + schema.type.join(' or '),
+          path);
     } else {
       if (SWAGGER_SUPPORTED_TYPES.indexOf(schema.type) < 0) {
-        throwError(UNKNOWN_REASON, 'Wrong swagger schema, trying to use unknown type ' + schema.type, path);
+        throwError(UNKNOWN_REASON,
+            'Wrong swagger schema, trying to use unknown type ' + schema.type,
+            path);
       }
 
       if (isValidType(schema.type, data)) {
         return;
       }
-      throwError(INVALID_TYPE, 'Incorrect type. Type should be ' + schema.type, path);
+      throwError(INVALID_TYPE,
+          'Incorrect type. Type should be ' + schema.type,
+          path);
     }
   };
   // expose this function outside
@@ -140,7 +146,9 @@ function Validator(swaggerDefinitions) {
   function validateMinimum (schema, data, path) {
     if (schema.hasOwnProperty('minimum')) {
       if (schema.minimum > _getDataLength(schema, data)) {
-        throwError(INVALID_MIN_LENGTH, 'The field needs to be equal to or bigger than ' + schema.minimum, path);
+        throwError(INVALID_MIN_LENGTH,
+            'The field needs to be equal to or bigger than ' + schema.minimum,
+            path);
       }
     }
   }
@@ -151,7 +159,9 @@ function Validator(swaggerDefinitions) {
   function validateMaximum (schema, data, path) {
     if (schema.hasOwnProperty('maximum')) {
       if (schema.maximum < _getDataLength(schema, data)) {
-        throwError(INVALID_MAX_LENGTH, 'The field needs to be equal to or smaller than ' + schema.maximum, path);
+        throwError(INVALID_MAX_LENGTH,
+            'The field needs to be equal to or smaller than ' + schema.maximum,
+            path);
       }
     }
   }
@@ -162,7 +172,9 @@ function Validator(swaggerDefinitions) {
   function validatePattern (schema, data, path) {
     if (schema.hasOwnProperty('pattern') && schema.type === 'string') {
       if (!RegExp(schema.pattern).test(data)) {
-        throwError(INVALID_STRING_PATTERN, 'The field needs to have a ' + schema.pattern + 'pattern.', path);
+        throwError(INVALID_STRING_PATTERN,
+            'The field needs to have a ' + schema.pattern + 'pattern.',
+            path);
       }
     }
   }
@@ -176,7 +188,9 @@ function Validator(swaggerDefinitions) {
         // TODO: this is tricky since it can be used with combination of min and max
         //      Also finding it in float gives incorrect result for (data % multipleOf )== 0.
         //      validate it integer for now
-        throwError(INVALID_MULTIPLE_OF, 'The field should be multiple of ' + schema.multipleOf , path);
+        throwError(INVALID_MULTIPLE_OF,
+            'The field should be multiple of ' + schema.multipleOf,
+            path);
       }
     }
   }
@@ -188,8 +202,6 @@ function Validator(swaggerDefinitions) {
    */
   function validateAnyOf(schema, data, path) {
     if (schema.hasOwnProperty('anyOf')) {
-      // Swagger does not allow object enum and this logic is very specific to
-      // our schema.
       let nothingMatched = true;
       let exceptions = [];
       for (let obj of schema.anyOf) {
@@ -203,7 +215,10 @@ function Validator(swaggerDefinitions) {
         }
       }
       if (nothingMatched) {
-        throwError(INVALID_ANY_OF, 'Tried object any of multiple but nothing matched.', path, exceptions); // eslint-disable-line
+        throwError(INVALID_ANY_OF,
+            'Tried object any of multiple but nothing matched.',
+            path,
+            exceptions); // eslint-disable-line
       }
     }
   }
@@ -215,8 +230,6 @@ function Validator(swaggerDefinitions) {
    */
   function validateOneOf(schema, data, path) {
     if (schema.hasOwnProperty('oneOf')) {
-      // Swagger does not allow object enum and this logic is very specific to
-      // our schema.
       let matchedCount = 0;
       let exceptions = [];
       for (let obj of schema.oneOf) {
@@ -230,11 +243,17 @@ function Validator(swaggerDefinitions) {
       }
 
       if (matchedCount === 0) {
-        throwError(INVALID_ONE_OF, 'Tried object one of multiple objects but nothing matched.', path, exceptions); // eslint-disable-line
+        throwError(INVALID_ONE_OF,
+            'Tried object one of multiple objects but nothing matched.',
+            path,
+            exceptions);
       }
 
       if (matchedCount !== 1) {
-        throwError(INVALID_ONE_OF, 'Tried object one of multiple objects but many are matched.', path, exceptions); // eslint-disable-line
+        throwError(INVALID_ONE_OF,
+            'Tried object one of multiple objects but many are matched.',
+            path,
+            exceptions);
       }
     }
   }
@@ -246,8 +265,6 @@ function Validator(swaggerDefinitions) {
    */
   function validateAllOf(schema, data, path) {
     if (schema.hasOwnProperty('allOf')) {
-      // Swagger does not allow object enum and this logic is very specific to
-      // our schema.
       let matchedCount = 0;
       let exceptions = [];
       for (let obj of schema.allOf) {
@@ -261,7 +278,10 @@ function Validator(swaggerDefinitions) {
       }
 
       if (matchedCount === schema.allOf.length) {
-        throwError(INVALID_ALL_OF, 'Tried object all of multiple objects but at least one didn\'t match.', path, exceptions); // eslint-disable-line
+        throwError(INVALID_ALL_OF,
+            'Tried object all of multiple objects but at least one didn\'t match.',
+            path,
+            exceptions); // eslint-disable-line
       }
     }
   }
@@ -291,7 +311,10 @@ function Validator(swaggerDefinitions) {
         }
       }
       if (nothingMatched) {
-        throwError(INVALID_ANY_OF, 'Tried object any of multiple but nothing matched.', path, exceptions); // eslint-disable-line
+        throwError(INVALID_ANY_OF,
+            'Tried object any of multiple but nothing matched.',
+            path,
+            exceptions); // eslint-disable-line
       }
     } else {
       if (enumList.indexOf(data) < 0) {   // eslint-disable-line
@@ -319,13 +342,17 @@ function Validator(swaggerDefinitions) {
     // validate minItems
     if (schema.hasOwnProperty('minItems')) {
       if (data.length < schema.minItems) {
-        throwError(MIN_ITEM_NUMMER_NOT_MET, 'Array should be greater than ' + schema.minItems, path);
+        throwError(MIN_ITEM_NUMMER_NOT_MET,
+            'Array should be greater than ' + schema.minItems,
+            path);
       }
     }
 
     if (schema.hasOwnProperty('maxItems')) {
       if (data.length > schema.maxItems) {
-        throwError(MAX_ITEM_NUMMER_NOT_MET, 'Array should be less than ' + schema.maxItems, path);
+        throwError(MAX_ITEM_NUMMER_NOT_MET,
+            'Array should be less than ' + schema.maxItems,
+            path);
       }
     }
 
@@ -350,7 +377,9 @@ function Validator(swaggerDefinitions) {
       let required = schema.required;
       for (let item of required) {
         if (!data.hasOwnProperty(item)) {
-          throwError(MISSING_REQUIRED_FIELD, 'Expect ' + item + ' to exist.', path);
+          throwError(MISSING_REQUIRED_FIELD,
+              'Expect ' + item + ' to exist.',
+              path);
         }
       }
     }
@@ -365,7 +394,9 @@ function Validator(swaggerDefinitions) {
           // Being very strict on schema. This could be optional
           // but it is necessary to validate enum of objects for double
           // validations.
-          throwError(INVALID_FIELD_EXISTS, 'contains ' + key + ' not specified in schema.', path);
+          throwError(INVALID_FIELD_EXISTS,
+              'contains ' + key + ' not specified in schema.',
+              path);
         }
       }
     }
