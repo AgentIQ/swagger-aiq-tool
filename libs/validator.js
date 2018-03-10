@@ -90,9 +90,6 @@ function Validator(swaggerDefinitions) {
     if (!schema.hasOwnProperty('type')) {
       return;
     }
-    if (SWAGGER_SUPPORTED_TYPES.indexOf(schema.type) < 0) {
-      throwError(UNKNOWN_REASON, 'Wrong swagger schema, trying to use unknown type ' + schema.type, path);
-    }
 
     if (typeof schema.type === 'object' && (schema.type instanceof Array)) {
       for (let type of schema.type) {
@@ -100,13 +97,17 @@ function Validator(swaggerDefinitions) {
           return;
         }
       }
+      throwError(INVALID_TYPE, 'Incorrect type. Type should be ' + schema.type.join(' or '), path);
     } else {
+      if (SWAGGER_SUPPORTED_TYPES.indexOf(schema.type) < 0) {
+        throwError(UNKNOWN_REASON, 'Wrong swagger schema, trying to use unknown type ' + schema.type, path);
+      }
+
       if (isValidType(schema.type, data)) {
         return;
       }
+      throwError(INVALID_TYPE, 'Incorrect type. Type should be ' + schema.type, path);
     }
-
-    throwError(INVALID_TYPE, 'Incorrect type. Type should be ' + schema.type, path);
   };
   // expose this function outside
   this.validateType = validateType;
