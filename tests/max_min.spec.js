@@ -41,7 +41,7 @@ describe('Validator - maximum, minimum, maxItems, and minItems', () => {
       age: 27,
       score: 55.9,
       family: ['amy', 'mike']
-    }
+    };
   });
 
   it('Should pass valid min/max values', (done) => {

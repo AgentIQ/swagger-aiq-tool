@@ -1659,6 +1659,20 @@
               "conversations.tags.attach"
             ]
           },
+          "params": {
+            "type": "object",
+            "enum": [
+              {
+                "$ref": "#/definitions/CommandWithIntStringParams"
+              },
+              {
+                "$ref": "#/definitions/CommandWithBooleanParams"
+              },
+              {
+                "$ref": "#/definitions/CommandEscalate"
+              }
+            ]
+          },
           "alert_agent": {
             "$ref": "#/definitions/CommandWithIntStringParams"
           },
@@ -2124,7 +2138,8 @@
           ]
         },
         "payload": {
-          "anyOf": [
+          "type": "object",
+          "enum": [
             {
               "$ref": "#/definitions/ActionPayload"
             },

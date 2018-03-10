@@ -140,7 +140,7 @@
           "type": "string"
         },
         "zipcode": {
-          "type": "string"
+          "type": "integer"
         },
         "lat": {
           "type": "string"
