@@ -35,8 +35,12 @@ const mockDefinitions = {
 
 
 describe('Validator - enum field', () => {
+  let v;
+  beforeEach(() => {
+    v = new Validator(mockDefinitions);
+  });
+
   it('Should validate a string enum field', (done) => {
-      let v = new Validator(mockDefinitions);
       v.validate(enumSchema, { name: 'test1' })
         .then(() => {
           return v.validate(enumSchema, { name: 'test10' })
@@ -50,7 +54,6 @@ describe('Validator - enum field', () => {
   });
 
   it('Should validate a nested string enum field', (done) => {
-      let v = new Validator(mockDefinitions);
       v.validate(enumSchema, { info: { category: 'food' } })
         .then(() => {
           return v.validate(enumSchema, { info: { category: 'foody' } })
@@ -64,7 +67,6 @@ describe('Validator - enum field', () => {
   });
 
   it('Should validate a integer enum field', (done) => {
-      let v = new Validator(mockDefinitions);
       v.validate(enumSchema, { age: 33 })
         .then(() => {
           return v.validate(enumSchema, { age: 34 })
@@ -78,7 +80,6 @@ describe('Validator - enum field', () => {
   });
 
   it('Should validate a nested integer enum field', (done) => {
-      let v = new Validator(mockDefinitions);
       v.validate(enumSchema, { info: { count: 10 } })
         .then(() => {
           return v.validate(enumSchema, { info: { count: 100 } })

@@ -33,8 +33,12 @@ const mockDefinitions = {
 };
 
 describe('Validator - required field', () => {
+  let v;
+  beforeEach(() => {
+    v = new Validator(mockDefinitions);
+  });
+
   it('Should validate a simple required field', (done) => {
-    let v = new Validator(mockDefinitions);
     v.validate(nameRequiredSchema, { name: 'james' })
       .then(() => {
         return v.validate(nameRequiredSchema, { first_name: 'james' })
@@ -48,7 +52,6 @@ describe('Validator - required field', () => {
   });
 
   it('Should validatea nested required field', (done) => {
-    let v = new Validator(mockDefinitions);
     v.validate(nameRequiredSchema, { name: 'james', info: { id:123 } })
       .then(() => {
         return v.validate(nameRequiredSchema, { name: 'james', info: { _id:123 } })
