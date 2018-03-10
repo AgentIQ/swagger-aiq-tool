@@ -94,7 +94,7 @@ function createMiddleWare(swaggerSchema) {
       .then(() => {
         if (parameter.name && parameter.type) {
           const value = extractNameValueFromPath(parameter.name, matchedPath, requestPath);
-          validator.validateType(parameter.type, value, ['paths']);
+          validator.validateType(parameter, value, ['paths']);
         } else {
           // TODO(jaewkwan): may need to always throw exception.
         }

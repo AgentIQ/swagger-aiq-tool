@@ -11,7 +11,7 @@ const intents = require('./data/examples/intents');
 //const commands = require('./data/examples/commands');
 
 describe('Validator - validate examples', () => {
-  it('Validate simple object', (done) => {
+  it('Validate a general simple object', (done) => {
     const test_data = [[
       {
         'type': 'object',

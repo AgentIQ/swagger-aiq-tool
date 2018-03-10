@@ -2124,8 +2124,7 @@
           ]
         },
         "payload": {
-          "type": "object",
-          "enum": [
+          "anyOf": [
             {
               "$ref": "#/definitions/ActionPayload"
             },
