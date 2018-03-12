@@ -1,5 +1,5 @@
 'use strict';
-const Validator = require('./validator');
+const { Validator } = require('./validator');
 
 /**
  * Create middleware.
