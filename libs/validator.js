@@ -173,7 +173,7 @@ function Validator(swaggerDefinitions) {
     if (schema.hasOwnProperty('pattern') && schema.type === 'string') {
       if (!RegExp(schema.pattern).test(data)) {
         throwError(INVALID_STRING_PATTERN,
-            'The field needs to have a ' + schema.pattern + 'pattern.',
+            'The field needs to have a ' + schema.pattern + ' pattern.',
             path);
       }
     }
