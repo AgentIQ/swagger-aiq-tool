@@ -1,6 +1,6 @@
 'use strict';
 
-// List of error types.
+// List of validator error types.
 const INVALID_FIELD_EXISTS = 'INVALID_FIELD_EXISTS';
 const MISSING_REQUIRED_FIELD = 'MISSING_REQUIRED_FIELD';
 const INVALID_ENUM_VALUE = 'INVALID_ENUM_VALUE';
@@ -16,6 +16,10 @@ const INVALID_MULTIPLE_OF = 'INVALID_MULTIPLE_OF';
 const INVALID_ANY_OF = 'INVALID_ANY_OF';
 const INVALID_ALL_OF = 'INVALID_ALL_OF';
 const INVALID_ONE_OF = 'INVALID_ONE_OF';
+
+// List of middleware error type
+const INVALID_PATH_TYPE = 'INVALID_PATH_TYPE';
+const INVALID_PARAMS = 'INVALID_PARAMS';
 
 /**
  * Format error and throw exception.
@@ -48,6 +52,8 @@ module.exports = { throwError,
     INVALID_ONE_OF,
     MIN_ITEM_NUMMER_NOT_MET,
     MAX_ITEM_NUMMER_NOT_MET,
+    INVALID_PATH_TYPE,
+    INVALID_PARAMS,
     INCORRECT_SCHEMA,
     UNKNOWN_REASON
   }

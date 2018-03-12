@@ -1,5 +1,7 @@
 'use strict';
 const { Validator } = require('./validator');
+const { error_type } = require('./error');
+const { INVALID_PATH_TYPE, INVALID_PARAMS } = error_type;
 
 /**
  * Create middleware.
@@ -94,10 +96,14 @@ function createMiddleWare(swaggerSchema) {
       .then(() => {
         if (parameter.name && parameter.type) {
           const value = extractNameValueFromPath(parameter.name, matchedPath, requestPath);
-          validator.validateType(parameter, value, ['paths']);
+          return validator.validateType(parameter, value, ['paths']);
         } else {
           // TODO(jaewkwan): may need to always throw exception.
         }
+      })
+      .catch(err => {
+        err.results.name = INVALID_PATH_TYPE;
+        throw err;
       });
   }
 
@@ -109,9 +115,13 @@ function createMiddleWare(swaggerSchema) {
       .then(() => {
         if (parameter.name && parameter.type) {
           if (params[parameter.name]) {
-            validator.validateType(parameter.type, params[parameter.name], ['parameters']);
+            return validator.validateType(parameter, params[parameter.name], ['parameters']);
           }
         }
+      })
+      .catch(err => {
+        err.results.name = INVALID_PARAMS;
+        throw err;
       });
   }
 

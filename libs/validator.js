@@ -110,6 +110,7 @@ function Validator(swaggerDefinitions) {
       if (isValidType(schema.type, data)) {
         return;
       }
+
       throwError(INVALID_TYPE,
           'Incorrect type. Type should be ' + schema.type,
           path);
