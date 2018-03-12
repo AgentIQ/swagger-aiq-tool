@@ -1,6 +1,6 @@
 {
   "name": "@agentiq/swagger-aiq-tool",
-  "version": "0.7.0",
+  "version": "0.8.0",
   "description": "swagger middleware and validator that support circular definition reference and enumeration of object.",
   "main": "index.js",
   "repository": {
