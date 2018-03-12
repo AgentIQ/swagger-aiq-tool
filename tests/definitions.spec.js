@@ -1,6 +1,7 @@
 /* eslint-env jasmine */
 
 const Validator = require('../libs/validator').Validator;
+const { compareNamePathReason }= require('./helper');
 
 const personSchema = {
   type: 'object',
@@ -37,9 +38,10 @@ describe('Validator - various type of definition references', () => {
         jsonData.parent.name = 23;
         return v.validate(personSchema, jsonData)
           .catch(err => {
-            expect(err.results.name).toEqual('INVALID_TYPE');
-            expect(err.results.path).toEqual(['parent', 'name']);
-            expect(err.results.reason).toEqual('Incorrect type. Type should be string');
+            compareNamePathReason(err,
+              'INVALID_TYPE',
+              ['parent', 'name'],
+              'Incorrect type. Type should be string');
             done();
           });
       });
@@ -60,9 +62,10 @@ describe('Validator - various type of definition references', () => {
         jsonData.parent.parent.name = 23;
         return v.validate(personSchema, jsonData)
           .catch(err => {
-            expect(err.results.name).toEqual('INVALID_TYPE');
-            expect(err.results.path).toEqual(['parent', 'parent', 'name']);
-            expect(err.results.reason).toEqual('Incorrect type. Type should be string');
+            compareNamePathReason(err,
+              'INVALID_TYPE',
+              ['parent', 'parent', 'name'],
+              'Incorrect type. Type should be string');
             done();
           });
       });
@@ -81,9 +84,10 @@ describe('Validator - various type of definition references', () => {
         jsonData.children[1].name = 23;
         return v.validate(personSchema, jsonData)
           .catch(err => {
-            expect(err.results.name).toEqual('INVALID_TYPE');
-            expect(err.results.path).toEqual(['children', 1,'name']);
-            expect(err.results.reason).toEqual('Incorrect type. Type should be string');
+            compareNamePathReason(err,
+              'INVALID_TYPE',
+              ['children', 1, 'name'],
+              'Incorrect type. Type should be string');
             done();
           });
       });
@@ -106,9 +110,10 @@ describe('Validator - various type of definition references', () => {
         jsonData.children[1].children[0].name = 20;
         return v.validate(personSchema, jsonData)
           .catch(err => {
-            expect(err.results.name).toEqual('INVALID_TYPE');
-            expect(err.results.path).toEqual(['children', 1, 'children', 0,'name']);
-            expect(err.results.reason).toEqual('Incorrect type. Type should be string');
+            compareNamePathReason(err,
+              'INVALID_TYPE',
+              ['children', 1, 'children', 0, 'name'],
+              'Incorrect type. Type should be string');
             done();
           });
       });
