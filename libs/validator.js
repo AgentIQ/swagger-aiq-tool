@@ -312,7 +312,7 @@ function Validator(swaggerDefinitions) {
         }
       }
       if (nothingMatched) {
-        throwError(INVALID_ANY_OF,
+        throwError(INVALID_ENUM_VALUE,
             'Tried object any of multiple but nothing matched.',
             path,
             exceptions); // eslint-disable-line

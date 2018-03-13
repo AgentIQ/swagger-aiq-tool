@@ -30,6 +30,9 @@ const typeSchema = {
     },
     specialty: {
       type: ['integer', 'string']
+    },
+    extra: {
+      type: 'object'
     }
   }
 };
@@ -124,5 +127,13 @@ describe('Validator - type checking', () => {
             done();
           });
       });
+  });
+
+  it('Should validate a empty object types.', (done) => {
+    v.validate(typeSchema, { extra: {} })
+      .then(() => {
+        return v.validate(typeSchema, { extra: { test:1, wow: 'dummy' } });
+      })
+      .then(() => done());
   });
 });
