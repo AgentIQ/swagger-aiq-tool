@@ -1,18 +1,22 @@
 Swagger AIQ Tool
 =========================
 
-Swagger AIQ Tool supports a express middleware and swagger validator. 
+Swagger AIQ Tool supports a express middleware and swagger validator. The middleware is compatible with swagger 2.0 and json schema that swagger 2.0 supports. This is specially made to support followings.
 
+- Circular definitions that a definition refer to another definition and it refers back to its parent definition.
+- Using enum with object. (It is equivalant to onoOf field in swagger 3.0 but not swagger 2.0)
 
 Using inside project
 ========================
 Add package
 -----------
 ```
-npm install -save swagger-aiq-tool // TODO: add to npm registry.
+// TODO: the package is currently stored in private registry. maybe make it public.
+npm install -save @agentiq/swagger-aiq-tool 
 ```
 Middleware Usage
 -----------
+The middleware is compatible with expressjs for now.
 ```
 const express = require('express');
 const schema = require('./path/to/schema');
@@ -25,7 +29,7 @@ app.use(tool.createMiddleware(schema));
 ```
 Validator
 -----------
-If you want to use validator seperately, it is available in the tool.
+The validator is a independent object and it can be used seperately as a component. It has an option variable for definitions.
 ```
 const Validator = require('swagger-aiq-tool').Validator;
 
