@@ -136,4 +136,27 @@ describe('Validator - type checking', () => {
       })
       .then(() => done());
   });
+
+  it('Should allow null by default.', (done) => {
+    Promise.resolve()
+      .then(() => {
+        return v.validate(typeSchema, { extra: {} });
+      })
+      .then(() => {
+        return v.validate(typeSchema, { extra: null });
+      })
+      .then(() => {
+        return v.validate(typeSchema, { specialty: 100 });
+      })
+      .then(() => {
+        return v.validate(typeSchema, { specialty: null });
+      })
+      .then(() => {
+        return v.validate(typeSchema, { name: 'john' });
+      })
+      .then(() => {
+        return v.validate(typeSchema, { name: null });
+      })
+      .then(() => done());
+  });
 });

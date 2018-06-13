@@ -25,12 +25,48 @@ const enumSchema = {
           enum: ['electronics', 'food', 'medicine']
         }
       }
+    },
+    generic_field: {
+      type: 'object',
+      enum: [
+        {
+          '$ref': '#/definitions/Electronic'
+        },
+        {
+          '$ref': '#/definitions/Cloth'
+        }
+      ]
+    }
+  }
+};
+
+const electronicSchema = {
+  type: 'object',
+  properties: {
+    voltage: {
+      type: 'string',
+      enum: ['110v', '100v', '200v', '220v']
+    }
+  }
+};
+
+const clothSchema = {
+  type: 'object',
+  properties: {
+    size: {
+      type: 'string',
+      enum: ['s', 'm', 'l']
+    },
+    length: {
+      type: 'integer'
     }
   }
 };
 
 const mockDefinitions = {
-  Product: enumSchema
+  Product: enumSchema,
+  Electronic: electronicSchema,
+  Cloth: clothSchema,
 };
 
 
@@ -89,6 +125,22 @@ describe('Validator - enum field', () => {
               expect(err.results.reason).toEqual('100 is not in enum list.');
               done();
             });
+        });
+  });
+
+  it('Should validate a object enum field', (done) => {
+      v.validate(enumSchema, { generic_field: { voltage: '110v' } })
+        .then(() => {
+          return v.validate(enumSchema, { generic_field: { size: 'm' } });
+        })
+        .then(() => {
+          return v.validate(enumSchema, { generic_field: { test: 1234 } });
+        })
+        .catch(err => {
+          expect(err.results.name).toEqual('INVALID_ENUM_VALUE');
+          expect(err.results.path).toEqual(['generic_field']);
+          expect(err.results.reason).toEqual('Tried object any of multiple but nothing matched.');
+          done();
         });
   });
 });

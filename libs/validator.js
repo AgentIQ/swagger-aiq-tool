@@ -48,6 +48,10 @@ function Validator(swaggerDefinitions) {
   };
 
   function isValidType(type, data) {
+    if (data === null) {
+      return true;
+    }
+
     switch (type) {
       case 'string':
         if (typeof data !== 'string') {
