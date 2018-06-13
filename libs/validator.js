@@ -455,9 +455,9 @@ function Validator(swaggerDefinitions) {
 
     validateEnum(schema, data, path);
 
-    if (schema.type === 'array') {
+    if (schema.type === 'array' && data !== null) {
       validateArray(schema, data, path);
-    } else if (schema.type === 'object') {
+    } else if (schema.type === 'object' && data !== null) {
       validateObject(schema, data, path);
     }
   }

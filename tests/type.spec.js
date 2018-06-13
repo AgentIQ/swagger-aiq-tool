@@ -16,6 +16,7 @@ const typeSchema = {
     },
     info: {
       type: 'object',
+      required: ['count'],
       properties: {
         count: {
           type: 'integer'
@@ -140,10 +141,10 @@ describe('Validator - type checking', () => {
   it('Should allow null by default.', (done) => {
     Promise.resolve()
       .then(() => {
-        return v.validate(typeSchema, { extra: {} });
+        return v.validate(typeSchema, { info: { count: 100 } });
       })
       .then(() => {
-        return v.validate(typeSchema, { extra: null });
+        return v.validate(typeSchema, { info: null });
       })
       .then(() => {
         return v.validate(typeSchema, { specialty: 100 });
